@@ -1,0 +1,18 @@
+{
+  "name": "mocking-api-selenium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha"
+  },
+  "author": "Daniel Panggabean",
+  "license": "ISC",
+  "dependencies": {
+    "selenium-webdriver": "^4.22.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.6.0",
+    "mochawesome": "^7.1.3"
+  }
+}
