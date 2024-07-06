@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2024-07-05T18:38:15.085Z",
-    "end": "2024-07-05T18:38:16.021Z",
-    "duration": 936,
+    "start": "2024-07-06T05:57:32.574Z",
+    "end": "2024-07-06T05:57:34.986Z",
+    "duration": 2412,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "944cffd3-84fc-4bbf-85a7-384704e92e4e",
+      "uuid": "da433260-c8f0-49c4-9fb4-07b41d0f6b49",
       "title": "",
       "fullFile": "/Users/daniel/Documents/Data Daniel/mocking-api-selenium/test/mocha.js",
       "file": "/test/mocha.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "ea37fd87-ac1a-41d8-b288-a71f3f0ae17f",
+          "uuid": "c2714878-8a30-4e3e-9c01-66a18d5b8acf",
           "title": "Using mocha",
           "fullFile": "/Users/daniel/Documents/Data Daniel/mocking-api-selenium/test/mocha.js",
           "file": "/test/mocha.js",
@@ -36,7 +36,7 @@
               "title": "\"before each\" hook in \"Using mocha\"",
               "fullTitle": "Using mocha \"before each\" hook in \"Using mocha\"",
               "timedOut": false,
-              "duration": 699,
+              "duration": 1490,
               "state": null,
               "speed": null,
               "pass": false,
@@ -45,8 +45,8 @@
               "context": null,
               "code": "driver = await new Builder().forBrowser(Browser.CHROME).build();",
               "err": {},
-              "uuid": "9c1e59e2-0df2-48ca-9695-f201f31f961d",
-              "parentUUID": "ea37fd87-ac1a-41d8-b288-a71f3f0ae17f",
+              "uuid": "9ff1e5d5-1ba4-4374-923b-480d6351551b",
+              "parentUUID": "c2714878-8a30-4e3e-9c01-66a18d5b8acf",
               "isHook": true,
               "skipped": false
             }
@@ -56,7 +56,7 @@
               "title": "\"after each\" hook in \"Using mocha\"",
               "fullTitle": "Using mocha \"after each\" hook in \"Using mocha\"",
               "timedOut": false,
-              "duration": 55,
+              "duration": 56,
               "state": null,
               "speed": null,
               "pass": false,
@@ -65,8 +65,8 @@
               "context": null,
               "code": "await driver.quit();",
               "err": {},
-              "uuid": "0196e6de-3640-43eb-a49b-897589321b68",
-              "parentUUID": "ea37fd87-ac1a-41d8-b288-a71f3f0ae17f",
+              "uuid": "791b046d-0ff8-48ba-959c-c594e1e21312",
+              "parentUUID": "c2714878-8a30-4e3e-9c01-66a18d5b8acf",
               "isHook": true,
               "skipped": false
             }
@@ -76,29 +76,29 @@
               "title": "Find element",
               "fullTitle": "Using mocha Find element",
               "timedOut": false,
-              "duration": 181,
+              "duration": 864,
               "state": "passed",
               "speed": "slow",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "await driver.navigate().to(mockingAppUrl);\nconst element = await driver.findElement(\n  By.xpath(\"//button[@class='content-button']\")\n);\nconst elementText = await element.getText();\nassert.ok(elementText === \"Add API\");",
+              "code": "await driver.navigate().to(MOCKING_API_URL);\nconst element = await driver.findElement(\n  By.xpath(\"//button[@class='content-button']\")\n);\nconst elementText = await element.getText();\nassert.ok(elementText === \"Add API\");",
               "err": {},
-              "uuid": "6a247417-103b-40e1-9af2-ecb79dec2cfe",
-              "parentUUID": "ea37fd87-ac1a-41d8-b288-a71f3f0ae17f",
+              "uuid": "6f9d1403-7833-4333-8eb8-6aa61770896e",
+              "parentUUID": "c2714878-8a30-4e3e-9c01-66a18d5b8acf",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "6a247417-103b-40e1-9af2-ecb79dec2cfe"
+            "6f9d1403-7833-4333-8eb8-6aa61770896e"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 181,
+          "duration": 864,
           "root": false,
           "rootEmpty": false,
           "_timeout": 0
