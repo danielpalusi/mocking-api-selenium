@@ -10,7 +10,7 @@ const XPATH = {
     "//button[contains(@class,'button-copy')]/parent::div/preceding-sibling::div",
   notification: "//div[contains(@class,'notification')]",
   btnEditAPI: "//button[@data-id=1]",
-  btnDeleteAPI: "//button[@data-id=42 and @class='delete']",
+  btnDeleteAPI: "//button[@data-id=47 and @class='delete']",
   // best practice: id using dynamic xpath, value from database
 };
 const UI_TEXT = {

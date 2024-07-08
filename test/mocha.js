@@ -85,4 +85,20 @@ describe("User", function () {
 
     assert.ok(popupTitle === UI_TEXT.btnEditAPI);
   });
+
+  it("Able to delete existing data", async function () {
+    const deleteData = driver.wait(
+      until.elementLocated(By.xpath(XPATH.btnDeleteAPI), 1000)
+    );
+
+    await driver.wait(until.elementIsVisible(deleteData), 1000);
+
+    await driver.executeScript(
+      'arguments[0].scrollIntoView({ behavior: "smooth" });',
+      deleteData
+    );
+
+    await deleteData.click();
+    await driver.wait(until.stalenessOf(deleteData), 1000);
+  });
 });
