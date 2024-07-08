@@ -1,11 +1,4 @@
-const {
-  Builder,
-  Browser,
-  By,
-  Key,
-  until,
-  Actions,
-} = require("selenium-webdriver");
+const { Builder, Browser, By, until } = require("selenium-webdriver");
 const assert = require("assert");
 const { MOCKING_API_URL, XPATH, UI_TEXT } = require("./constants/constant");
 
@@ -100,5 +93,90 @@ describe("User", function () {
 
     await deleteData.click();
     await driver.wait(until.stalenessOf(deleteData), 1000);
+  });
+
+  it("Unable to request API when required field is empty", async function () {
+    const btnAddAPI = await driver.findElement(By.xpath(XPATH.btnAddAPI));
+    await btnAddAPI.click();
+
+    const inputName = await driver.findElement(By.xpath(XPATH.inputNamePopup));
+    const selectPath = await driver.findElement(
+      By.xpath(XPATH.selectMethodPopup)
+    );
+    const inputPath = await driver.findElement(By.xpath(XPATH.inputPathPopup));
+    const inputResponseCode = await driver.findElement(
+      By.xpath(XPATH.inputResponseCodePopup)
+    );
+    const inputRequest = await driver.findElement(
+      By.xpath(XPATH.textAreaRequestPopup)
+    );
+    const inputResponse = await driver.findElement(
+      By.xpath(XPATH.textAreaResponsePopup)
+    );
+    const btnAddPopup = await driver.findElement(
+      By.xpath(XPATH.btnAddAPIPopup)
+    );
+
+    await driver.actions().sendKeys(inputName, "test").perform();
+    const optionSelect = await selectPath.findElement(
+      By.xpath(`//option[. = 'GET']`)
+    );
+    await optionSelect.click();
+    await driver.actions().sendKeys(inputPath, "/test").perform();
+    await driver.actions().sendKeys(inputResponseCode, "200").perform();
+    await driver
+      .actions()
+      .sendKeys(inputRequest, `{"request": "request"}`)
+      .perform();
+    // await driver
+    //   .actions()
+    //   .sendKeys(inputResponse, "{'response': 'response'}")
+    //   .perform();
+    // response field is not filled
+    await btnAddPopup.click();
+    const notificationText = await driver
+      .wait(until.elementLocated(By.xpath(XPATH.notification), 1000))
+      .getText();
+
+    assert.ok(notificationText.includes(UI_TEXT.notificationRequiredFields));
+  });
+
+  it("Able to request API when request field is empty", async function () {
+    const btnAddAPI = await driver.findElement(By.xpath(XPATH.btnAddAPI));
+    await btnAddAPI.click();
+
+    const inputName = await driver.findElement(By.xpath(XPATH.inputNamePopup));
+    const selectPath = await driver.findElement(
+      By.xpath(XPATH.selectMethodPopup)
+    );
+    const inputPath = await driver.findElement(By.xpath(XPATH.inputPathPopup));
+    const inputResponseCode = await driver.findElement(
+      By.xpath(XPATH.inputResponseCodePopup)
+    );
+    const inputResponse = await driver.findElement(
+      By.xpath(XPATH.textAreaResponsePopup)
+    );
+    const btnAddPopup = await driver.findElement(
+      By.xpath(XPATH.btnAddAPIPopup)
+    );
+
+    await driver.actions().sendKeys(inputName, "test2").perform();
+    const optionSelect = await selectPath.findElement(
+      By.xpath(`//option[. = 'GET']`)
+    );
+    await optionSelect.click();
+    await driver.actions().sendKeys(inputPath, "/test2").perform();
+    await driver.actions().sendKeys(inputResponseCode, "200").perform();
+    await driver
+      .actions()
+      .sendKeys(inputResponse, `{"response": "response"}`)
+      .perform();
+
+    await btnAddPopup.click();
+    const notificationText = await driver
+      .wait(until.elementLocated(By.xpath(XPATH.notification), 10000))
+      .getText();
+
+    assert.ok(notificationText.includes(UI_TEXT.notificationSuccess));
   });
 });

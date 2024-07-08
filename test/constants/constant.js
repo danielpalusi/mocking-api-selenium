@@ -8,10 +8,17 @@ const XPATH = {
   btnCopyCURL: "//button[contains(@class,'button-copyCURL')]",
   textAPI:
     "//button[contains(@class,'button-copy')]/parent::div/preceding-sibling::div",
-  notification: "//div[contains(@class,'notification')]",
+  notification: "//div[contains(@class,'notification show')]",
   btnEditAPI: "//button[@data-id=1]",
-  btnDeleteAPI: "//button[@data-id=47 and @class='delete']",
+  btnDeleteAPI: "//button[@data-id=65 and @class='delete']",
   // best practice: id using dynamic xpath, value from database
+  inputNamePopup: "//input[@id='name']",
+  selectMethodPopup: "//select[@id='method']",
+  inputPathPopup: "//input[@id='path']",
+  inputResponseCodePopup: "//input[@id='response-code']",
+  textAreaRequestPopup: "//textarea[@id='request']",
+  textAreaResponsePopup: "//textarea[@id='response']",
+  btnAddAPIPopup: "//button[@class='popup-button__add']",
 };
 const UI_TEXT = {
   btnAddAPI: "Add API",
@@ -26,6 +33,8 @@ const UI_TEXT = {
   ],
   notificationCopiedAPI: "Copied to clipboard",
   btnEditAPI: "Edit API",
+  notificationRequiredFields: "Please fill in the required fields",
+  notificationSuccess: "Success",
 };
 
 module.exports = {
