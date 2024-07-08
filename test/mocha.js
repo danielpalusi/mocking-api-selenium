@@ -1,7 +1,13 @@
-const { Builder, Browser, By, Key, until } = require("selenium-webdriver");
+const {
+  Builder,
+  Browser,
+  By,
+  Key,
+  until,
+  Actions,
+} = require("selenium-webdriver");
 const assert = require("assert");
 const { MOCKING_API_URL, XPATH, UI_TEXT } = require("./constants/constant");
-const { log } = require("console");
 
 describe("User", function () {
   this.timeout(0);
@@ -9,6 +15,7 @@ describe("User", function () {
 
   this.beforeEach(async function () {
     driver = await new Builder().forBrowser(Browser.CHROME).build();
+    await driver.navigate().to(MOCKING_API_URL);
   });
 
   this.afterEach(async function () {
@@ -16,8 +23,6 @@ describe("User", function () {
   });
 
   it("Able to see Add API", async function () {
-    await driver.navigate().to(MOCKING_API_URL);
-
     const btnAddAPI = await driver.findElement(By.xpath(XPATH.btnAddAPI));
     const elementText = await btnAddAPI.getText();
 
@@ -25,8 +30,6 @@ describe("User", function () {
   });
 
   it("Able to click Add API button", async function () {
-    await driver.navigate().to(MOCKING_API_URL);
-
     const btnAddAPI = await driver.findElement(By.xpath(XPATH.btnAddAPI));
     await btnAddAPI.click();
 
@@ -37,16 +40,49 @@ describe("User", function () {
     let displayValue = await popup.getCssValue("display");
 
     assert.ok(displayValue !== "none");
-    console.log(popupTitle);
     assert.ok(popupTitle === UI_TEXT.btnAddAPI);
   });
 
   it("Able to see table column text", async function () {
-    await driver.navigate().to(MOCKING_API_URL);
-
     const tableTh = await driver.findElements(By.xpath(XPATH.tableHead));
     tableTh.forEach(async (val, idx) =>
       assert.ok((await val.getText()) === UI_TEXT.tableTh[idx])
     );
+  });
+
+  it("Able to copy URL from existing data", async function () {
+    const btnCopyUrl = await driver.wait(
+      until.elementLocated(By.xpath(XPATH.btnCopyURL), 1000)
+    );
+    await btnCopyUrl.click();
+    const notificationText = await driver
+      .wait(until.elementLocated(By.xpath(XPATH.notification), 1000))
+      .getText();
+
+    assert.ok(notificationText.includes(UI_TEXT.notificationCopiedAPI));
+  });
+
+  it("Able to copy CURL from existing data", async function () {
+    const btnCopyUrl = await driver.wait(
+      until.elementLocated(By.xpath(XPATH.btnCopyCURL), 1000)
+    );
+    await btnCopyUrl.click();
+    const notificationText = await driver
+      .wait(until.elementLocated(By.xpath(XPATH.notification), 1000))
+      .getText();
+
+    assert.ok(notificationText.includes(UI_TEXT.notificationCopiedAPI));
+  });
+
+  it("Able to edit existing data", async function () {
+    const editData = driver.wait(
+      until.elementLocated(By.xpath(XPATH.btnEditAPI), 1000)
+    );
+    await editData.click();
+    const popupTitle = await driver
+      .findElement(By.xpath(XPATH.popupTitle))
+      .getText();
+
+    assert.ok(popupTitle === UI_TEXT.btnEditAPI);
   });
 });

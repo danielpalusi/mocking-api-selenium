@@ -4,6 +4,14 @@ const XPATH = {
   popupAddEdit: "//div[@class='popup']",
   popupTitle: "//h2[@class='popup-title']",
   tableHead: "//table[@class='content-table']//th",
+  btnCopyURL: "//button[contains(@class,'button-copy')]",
+  btnCopyCURL: "//button[contains(@class,'button-copyCURL')]",
+  textAPI:
+    "//button[contains(@class,'button-copy')]/parent::div/preceding-sibling::div",
+  notification: "//div[contains(@class,'notification')]",
+  btnEditAPI: "//button[@data-id=1]",
+  btnDeleteAPI: "//button[@data-id=42 and @class='delete']",
+  // best practice: id using dynamic xpath, value from database
 };
 const UI_TEXT = {
   btnAddAPI: "Add API",
@@ -16,6 +24,8 @@ const UI_TEXT = {
     "Response",
     "Action",
   ],
+  notificationCopiedAPI: "Copied to clipboard",
+  btnEditAPI: "Edit API",
 };
 
 module.exports = {
