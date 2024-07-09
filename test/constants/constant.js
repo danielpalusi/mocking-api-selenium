@@ -10,7 +10,7 @@ const XPATH = {
     "//button[contains(@class,'button-copy')]/parent::div/preceding-sibling::div",
   notification: "//div[contains(@class,'notification show')]",
   btnEditAPI: "//button[@data-id=1]",
-  btnDeleteAPI: "//button[@data-id=65 and @class='delete']",
+  btnDeleteAPI: "//button[@data-id=80 and @class='delete']",
   // best practice: id using dynamic xpath, value from database
   inputNamePopup: "//input[@id='name']",
   selectMethodPopup: "//select[@id='method']",
@@ -19,6 +19,9 @@ const XPATH = {
   textAreaRequestPopup: "//textarea[@id='request']",
   textAreaResponsePopup: "//textarea[@id='response']",
   btnAddAPIPopup: "//button[@class='popup-button__add']",
+  btnCancelAPIPopup: "//button[@class='popup-button__cancel']",
+  btnLinkedinBE: "//div[@class='footer']/a[text()='backend']",
+  btnLinkedinFE: "//div[@class='footer']/a[text()='frontend']",
 };
 const UI_TEXT = {
   btnAddAPI: "Add API",

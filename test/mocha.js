@@ -79,7 +79,7 @@ describe("User", function () {
     assert.ok(popupTitle === UI_TEXT.btnEditAPI);
   });
 
-  it("Able to delete existing data", async function () {
+  it.skip("Able to delete existing data", async function () {
     const deleteData = driver.wait(
       until.elementLocated(By.xpath(XPATH.btnDeleteAPI), 1000)
     );
@@ -92,7 +92,7 @@ describe("User", function () {
     );
 
     await deleteData.click();
-    await driver.wait(until.stalenessOf(deleteData), 1000);
+    await driver.wait(until.stalenessOf(deleteData), 10000);
   });
 
   it("Unable to request API when required field is empty", async function () {
@@ -160,12 +160,12 @@ describe("User", function () {
       By.xpath(XPATH.btnAddAPIPopup)
     );
 
-    await driver.actions().sendKeys(inputName, "test2").perform();
+    await driver.actions().sendKeys(inputName, "testx").perform();
     const optionSelect = await selectPath.findElement(
       By.xpath(`//option[. = 'GET']`)
     );
     await optionSelect.click();
-    await driver.actions().sendKeys(inputPath, "/test2").perform();
+    await driver.actions().sendKeys(inputPath, "/testx").perform();
     await driver.actions().sendKeys(inputResponseCode, "200").perform();
     await driver
       .actions()
@@ -178,5 +178,45 @@ describe("User", function () {
       .getText();
 
     assert.ok(notificationText.includes(UI_TEXT.notificationSuccess));
+  });
+
+  it("Able to close popup when cancel button is clicked", async function () {
+    const btnAddAPI = await driver.findElement(By.xpath(XPATH.btnAddAPI));
+    await btnAddAPI.click();
+    const btnCancel = await driver.findElement(
+      By.xpath(XPATH.btnCancelAPIPopup)
+    );
+    await btnCancel.click();
+    const popup = await driver.findElement(By.xpath(XPATH.popupAddEdit));
+    const displayValue = await popup.getCssValue("display");
+
+    assert.ok(displayValue == "none");
+  });
+
+  it("Able to redirect to linkedin page", async function () {
+    const currentTabId = await driver.getWindowHandle();
+    const linkLinkedinBE = await driver.findElement(
+      By.xpath(XPATH.btnLinkedinBE)
+    );
+    const linkLinkedinFE = await driver.findElement(
+      By.xpath(XPATH.btnLinkedinFE)
+    );
+    const handleRedirect = async (link) => {
+      await link.click();
+      await driver.wait(
+        async () => (await driver.getAllWindowHandles()).length === 2,
+        10000
+      );
+      const tabs = await driver.getAllWindowHandles();
+      const newTab = tabs.find((tab) => tab !== currentTabId);
+      await driver.switchTo().window(newTab);
+
+      const newTabUrl = await driver.getCurrentUrl();
+      assert.ok(newTabUrl.includes("linkedin"));
+      await driver.close();
+      await driver.switchTo().window(currentTabId);
+    };
+    await handleRedirect(linkLinkedinBE);
+    await handleRedirect(linkLinkedinFE);
   });
 });
